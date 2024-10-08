@@ -13,5 +13,5 @@ echo "VERSION: $VERSION"
 set -x
 
 # Build Docker images for book_catalog and inventory_management
-docker build -t $CONTAINER_REGISTRY/book_catalog:$VERSION ./book_catalog
-docker build -t $CONTAINER_REGISTRY/inventory_management:$VERSION ./inventory_management
+docker buildx build -t $CONTAINER_REGISTRY/book_catalog:$VERSION ./book_catalog
+docker buildx build -t $CONTAINER_REGISTRY/inventory_management:$VERSION ./inventory_management
