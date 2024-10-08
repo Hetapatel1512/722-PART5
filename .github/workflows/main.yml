@@ -31,7 +31,7 @@ jobs:
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-          kubectl-version: "v${{ vars.AZURE_AKS_VERSION }}"
+          kubectl-version: "v${{ vars.AKS_VERSION }}"
 
       - name: Deploy
         run: bash ./scripts/deploy.sh
