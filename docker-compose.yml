@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: sit722part5_yypa_user
+      POSTGRES_PASSWORD: KJC3PbCNEX7HrKMJUXMcaa0DMxP8755A
+      POSTGRES_DB: sit722part5_yypa
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  book_catalog:
+    build: ./book_catalog
+    image: book_catalog
+    environment:
+      DATABASE_URL: postgresql://sit722part5_yypa_user:KJC3PbCNEX7HrKMJUXMcaa0DMxP8755A@dpg-cs2ip2e8ii6s739jaqn0-a.oregon-postgres.render.com/sit722part5_yypa
+    depends_on:
+      - postgres
+    ports:
+      - "5001:5001"
+
+  inventory_management:
+    build: ./inventory_management
+    image: inventory_management
+    environment:
+      DATABASE_URL: postgresql://sit722part5_yypa_user:KJC3PbCNEX7HrKMJUXMcaa0DMxP8755A@dpg-cs2ip2e8ii6s739jaqn0-a.oregon-postgres.render.com/sit722part5_yypa
+    depends_on:
+      - postgres
+    ports:
+      - "5002:5002"
+
+volumes:
+  postgres_data:

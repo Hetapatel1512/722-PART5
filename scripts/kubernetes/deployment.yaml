@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-catalog-deployment
+  labels:
+    app: book-catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-catalog
+  template:
+    metadata:
+      labels:
+        app: book-catalog
+    spec:
+      containers:
+      - name: book-catalog-container
+        image: /book_catalog:latest
+        ports:
+        - containerPort: 5001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-management-deployment
+  labels:
+    app: inventory-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-management
+  template:
+    metadata:
+      labels:
+        app: inventory-management
+    spec:
+      containers:
+      - name: inventory-management-container
+        image: /inventory_management:latest
+        ports:
+        - containerPort: 5002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-catalog-service
+spec:
+  selector:
+    app: book-catalog
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+      name: http-port
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-management-service
+spec:
+  selector:
+    app: inventory-management
+  ports:
+    - protocol: TCP
+      port: 5002
+      targetPort: 5002
+      name: http-port
+  type: LoadBalancer
