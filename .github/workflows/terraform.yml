@@ -3,11 +3,14 @@ name: Terraform Build and Secrets Output (deprecated)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  secrets: write
+
 jobs:
   terraform:
     name: Terraform actions
     runs-on: ubuntu-latest
-
 
     steps:
    
@@ -63,7 +66,6 @@ jobs:
     - name: Create GitHub Secrets
       run: |
         echo "Creating or updating secrets in GitHub repository"
-
         gh secret set CONTAINER_REGISTRY -b "${{ env.acr_login_url }}"
         gh secret set REGISTRY_UN -b "${{ env.acr_username }}"
         gh secret set REGISTRY_PW -b "${{ env.acr_password }}"
