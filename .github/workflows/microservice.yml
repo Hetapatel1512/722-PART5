@@ -11,11 +11,19 @@ jobs:
       VERSION: ${{ github.sha }}
       CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
       REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
-      REGISTRY_PW: ${{ secrets.REGISTRY_PW  }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
 
     steps:
       # Checkout the code
       - uses: actions/checkout@v3
+
+      # Set up Docker Buildx (optional for advanced builds)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Log in to Azure Container Registry
+      - name: Log in to ACR
+        run: echo ${{ secrets.REGISTRY_PW }} | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ secrets.REGISTRY_UN }} --password-stdin
 
       # Make the build-image.sh script executable
       - name: Make build-image.sh executable
@@ -37,6 +45,7 @@ jobs:
       - name: Push Docker Image
         run: ./scripts/push-image.sh
 
+      # Configure kubectl for deployment
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
@@ -45,3 +54,4 @@ jobs:
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
+
