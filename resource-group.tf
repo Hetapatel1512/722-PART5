@@ -2,6 +2,6 @@
 # Creates a resource group for FlixTube in your Azure account.
 #
 resource "azurerm_resource_group" "flixtube" {
-  name     = var.app_name
-  location = var.location
+  name     = "sit722week92D-hp"
+  location = "eastus"
 }
