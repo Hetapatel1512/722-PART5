@@ -21,6 +21,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Debug Docker Login
+        run: |
+          echo "Logging into ACR"
+          echo "CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}"
+          echo "REGISTRY_UN: ${{ secrets.REGISTRY_UN }}"
+          docker info
+          echo ${{ secrets.REGISTRY_PW }} | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ secrets.REGISTRY_UN }} --password-stdin
+
+
       # Log in to Azure Container Registry
       - name: Log in to ACR
         run: echo ${{ secrets.REGISTRY_PW }} | docker login ${{ secrets.CONTAINER_REGISTRY }} -u ${{ secrets.REGISTRY_UN }} --password-stdin
