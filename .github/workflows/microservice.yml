@@ -54,4 +54,3 @@ jobs:
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
-
