@@ -6,6 +6,9 @@ set -u
 : "$REGISTRY_UN"
 : "$REGISTRY_PW"
 
+# Enable verbose output
+set -x
+
 # Log in to the container registry
 echo $REGISTRY_PW | docker login $CONTAINER_REGISTRY --username $REGISTRY_UN --password-stdin
 
