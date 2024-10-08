@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: book-catalog-container
-        image: /book_catalog:latest
+        image: sit722week92d4.azurecr.io/book_catalog:latest
         ports:
         - containerPort: 5001
 ---
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: inventory-management-container
-        image: /inventory_management:latest
+        image: sit722week92d4.azurecr.io/inventory_management:latest
         ports:
         - containerPort: 5002
 ---
