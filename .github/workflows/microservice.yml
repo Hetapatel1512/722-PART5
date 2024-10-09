@@ -63,13 +63,13 @@ jobs:
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
 
-      # Get the status of deployments
-      - name: Get Deployments Status
-        run: kubectl get deployments -o wide
-
       # Get the status of pods
       - name: Get Pods Status
         run: kubectl get pods -o wide
+
+      # Get the status of deployments
+      - name: Get Deployments Status
+        run: kubectl get deployments -o wide
 
       # Get the status of services
       - name: Get Services Status
