@@ -4,8 +4,6 @@ set -u
 : "$CONTAINER_REGISTRY"
 : "$VERSION"
 
-export KUBECONFIG=/home/runner/.kube/config
-
 set -x
 
 # Use kubectl to deploy the services
