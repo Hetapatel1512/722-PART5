@@ -46,10 +46,10 @@ jobs:
         run: ./scripts/push-image.sh ${{ github.sha }}
 
       # Configure kubectl for deployment
-      - uses: tale/kubectl-action@v1
-        with:
-          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-          kubectl-version: v1.30.2
+      - name: Set up Kubernetes config
+        run: |
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
 
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
