@@ -47,11 +47,11 @@ jobs:
       # Get AKS credentials
       - name: Getting AKS credentials
         run: |
-          az aks get-credentials --resource-group sit722week92D9 --name sit722week92D9 --overwrite-existing
+          az aks get-credentials --resource-group sit722week92D15 --name sit722week92D15 --overwrite-existing
 
       # Attach ACR to AKS
       - name: Attach ACR to AKS
-        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr sit722week92D9
+        run: az aks update -n sit722week92D15 -g sit722week92D15 --attach-acr sit722week92D15
 
       # Set up kubectl
       - uses: tale/kubectl-action@v1
