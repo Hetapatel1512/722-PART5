@@ -20,7 +20,7 @@ jobs:
       # Login to ACR using secrets
       - name: Login to ACR
         run: |
-          echo ${{ secrets.REGISTRY_PW }} | docker login ${{ env.CONTAINER_REGISTRY }}.azurecr.io -u ${{ secrets.REGISTRY_UN }} --password-stdin
+          echo ${{ secrets.REGISTRY_PW }} | docker login ${{ env.CONTAINER_REGISTRY }} -u ${{ secrets.REGISTRY_UN }} --password-stdin
 
       # Make scripts executable
       - name: Make build-image.sh executable
