@@ -52,6 +52,11 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      # Debug: Echo Kubernetes Config to validate the content (optional, remove this after validation)
+      - name: Echo Kubernetes Config (debugging)
+        run: cat $HOME/.kube/config
+        if: ${{ always() }}  # This ensures the step runs even if previous steps fail for debugging purposes.
+
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
