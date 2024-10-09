@@ -69,7 +69,7 @@ jobs:
 
       # 12. Get the status of deployments
       - name: Get Deployments Status
-        run: kubectl get deployments --all-namespaces=true -o wide
+        run: kubectl get deployments --insecure-skip-tls-verify -o wide
 
       # 13. Get the status of services
       - name: Get Services Status
