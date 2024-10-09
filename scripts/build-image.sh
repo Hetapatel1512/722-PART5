@@ -13,5 +13,5 @@ echo "VERSION: $VERSION"
 set -x
 
 # Build the Docker images with the correct tags
-docker build -t $CONTAINER_REGISTRY/book_catalog:$VERSION -f ./Dockerfile .
-docker build -t $CONTAINER_REGISTRY/inventory_management:$VERSION -f ./Dockerfile .
+docker build -t $CONTAINER_REGISTRY/book_catalog:$VERSION -f ./book_catalog/Dockerfile .
+docker build -t $CONTAINER_REGISTRY/inventory_management:$VERSION -f ./inventory_management/Dockerfile .
