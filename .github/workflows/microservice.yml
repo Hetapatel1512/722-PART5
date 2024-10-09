@@ -16,38 +16,38 @@ jobs:
     steps:
       # Checkout the code
       - uses: actions/checkout@v3
+      
+      # Login to ACR using secrets
       - name: Login to ACR
         run: |
-          echo ${{ secrets.ARM_CLIENT_SECRET }} | docker login ${{ env.CONTAINER_REGISTRY }}.azurecr.io -u ${{ secrets.ARM_CLIENT_ID }} --password-stdin
-         
-      # Make the build-image.sh script executable
+          echo ${{ secrets.REGISTRY_PW }} | docker login ${{ env.CONTAINER_REGISTRY }}.azurecr.io -u ${{ secrets.REGISTRY_UN }} --password-stdin
+
+      # Make scripts executable
       - name: Make build-image.sh executable
         run: chmod +x ./scripts/build-image.sh
-
-      # Make the push-image.sh script executable
       - name: Make push-image.sh executable
         run: chmod +x ./scripts/push-image.sh
-
-      # Make the deploy.sh script executable
       - name: Make deploy.sh executable
         run: chmod +x ./scripts/deploy.sh
 
-      # Build Docker images
+      # Build Docker image
       - name: Build Docker Image
         run: ./scripts/build-image.sh
 
-      # Push Docker images to ACR
+      # Push Docker image to ACR
       - name: Push Docker Image
         run: ./scripts/push-image.sh
 
+      # Get AKS credentials
       - name: Getting AKS credentials
         run: |
           az aks get-credentials --resource-group sit722week92D9 --name sit722week92D9 --overwrite-existing
 
+      # Attach ACR to AKS
       - name: Attach ACR to AKS
-        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr sit722week92D9
+        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr ${{ env.CONTAINER_REGISTRY }}
 
-      # Set up kubectl (use a specific version and base64-encoded Kubeconfig)
+      # Set up kubectl
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
