@@ -1,4 +1,4 @@
-name: Deploy microservice
+name: Deploy microservice 1
 
 on:
   push:
