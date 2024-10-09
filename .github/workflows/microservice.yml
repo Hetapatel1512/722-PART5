@@ -27,7 +27,7 @@ jobs:
 
       # Make the build-image.sh script executable
       - name: Make build-image.sh executable
-        run: chmod +x ./scripts/build-image.sh
+        run: chmod +x ./scripts/build-image.sh ${{ github.sha }}
 
       # Make the push-image.sh script executable
       - name: Make push-image.sh executable
@@ -49,7 +49,7 @@ jobs:
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-          kubectl-version: v1.24.2
+          kubectl-version: v1.30.2
 
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
