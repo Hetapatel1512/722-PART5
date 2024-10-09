@@ -51,7 +51,7 @@ jobs:
 
       # Attach ACR to AKS
       - name: Attach ACR to AKS
-        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr ${{ env.CONTAINER_REGISTRY }}
+        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr sit722week92D9
 
       # Set up kubectl
       - uses: tale/kubectl-action@v1
