@@ -69,7 +69,7 @@ jobs:
 
       # Get the status of deployments
       - name: Get Deployments Status
-        run: kubectl get deployments -o wide
+        run: kubectl get deployments --all-namespaces=true -o wide
 
       # Get the status of services
       - name: Get Services Status
