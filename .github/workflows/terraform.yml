@@ -1,4 +1,4 @@
-name: Terraform Build and Secrets Output (deprecated)
+name: Terraform Build and Secrets Output (deprecated) 1
 
 on:
   workflow_dispatch:
