@@ -11,7 +11,7 @@ jobs:
       VERSION: ${{ github.sha }}
       CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
       REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
-      REGISTRY_PW: ${{ secrets.REGISTRY_PW  }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
 
     steps:
       # Checkout the code
@@ -37,6 +37,7 @@ jobs:
       - name: Push Docker Image
         run: ./scripts/push-image.sh
 
+      # Set up kubectl (use a specific version and base64-encoded Kubeconfig)
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
@@ -45,3 +46,15 @@ jobs:
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
+
+      # Get the status of deployments
+      - name: Get Deployments Status
+        run: kubectl get deployments -o wide
+
+      # Get the status of pods
+      - name: Get Pods Status
+        run: kubectl get pods -o wide
+
+      # Get the status of services
+      - name: Get Services Status
+        run: kubectl get services -o wide
