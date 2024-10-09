@@ -27,8 +27,8 @@ jobs:
 
       # Make the build-image.sh script executable
       - name: Make build-image.sh executable
-        run: chmod +x ./scripts/build-image.sh ${{ github.sha }}
-
+        run: chmod +x ./scripts/build-image.sh 
+        
       # Make the push-image.sh script executable
       - name: Make push-image.sh executable
         run: chmod +x ./scripts/push-image.sh
@@ -39,11 +39,11 @@ jobs:
 
       # Build Docker images
       - name: Build Docker Image
-        run: ./scripts/build-image.sh
+        run: ./scripts/build-image.sh ${{ github.sha }}
         
       # Push Docker images to ACR
       - name: Push Docker Image
-        run: ./scripts/push-image.sh
+        run: ./scripts/push-image.sh ${{ github.sha }}
 
       # Configure kubectl for deployment
       - uses: tale/kubectl-action@v1
