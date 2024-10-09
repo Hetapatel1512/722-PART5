@@ -19,6 +19,8 @@ spec:
         image: $CONTAINER_REGISTRY/book_catalog:$VERSION
         ports:
         - containerPort: 5001
+      imagePullSecrets:
+        - name: acr-secret   # Added imagePullSecrets here
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,6 +43,8 @@ spec:
         image: $CONTAINER_REGISTRY/inventory_management:$VERSION
         ports:
         - containerPort: 5002
+      imagePullSecrets:
+        - name: acr-secret   # Added imagePullSecrets here
 ---
 apiVersion: v1
 kind: Service
