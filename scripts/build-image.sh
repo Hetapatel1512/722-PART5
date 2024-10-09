@@ -12,6 +12,6 @@ echo "VERSION: $VERSION"
 # Enable verbose output
 set -x
 
-# Build Docker images for book_catalog and inventory_management
-docker buildx build -t $CONTAINER_REGISTRY/book_catalog:$VERSION ./book_catalog
-docker buildx build -t $CONTAINER_REGISTRY/inventory_management:$VERSION ./inventory_management
+# Build the Docker images with the correct tags
+docker build -t $CONTAINER_REGISTRY/book_catalog:$VERSION -f ./Dockerfile.book_catalog .
+docker build -t $CONTAINER_REGISTRY/inventory_management:$VERSION -f ./Dockerfile.inventory_management .
