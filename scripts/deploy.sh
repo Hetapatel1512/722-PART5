@@ -7,4 +7,5 @@ set -u
 set -x
 
 # Use kubectl to deploy the services
-envsubst < ./scripts/kubernetes/deployment.yaml | kubectl apply -f -
+envsubst < ./scripts/kubernetes/deployment.yaml | kubectl apply --insecure-skip-tls-verify --validate=false -f -
+
