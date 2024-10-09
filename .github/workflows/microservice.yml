@@ -65,7 +65,7 @@ jobs:
 
       # 11. Get the status of pods
       - name: Get Pods Status
-        run: kubectl get pods -o wide
+        run: kubectl get pods --insecure-skip-tls-verify -o wide
 
       # 12. Get the status of deployments
       - name: Get Deployments Status
@@ -73,4 +73,4 @@ jobs:
 
       # 13. Get the status of services
       - name: Get Services Status
-        run: kubectl get services -o wide
+        run: kubectl get services --insecure-skip-tls-verify -o wide
