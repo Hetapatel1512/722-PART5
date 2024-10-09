@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
-COPY requirements.txt .
+COPY book_catalog/requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy the current directory contents into the container
