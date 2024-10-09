@@ -16,7 +16,17 @@ jobs:
     steps:
       # Checkout the code
       - uses: actions/checkout@v3
+      - name: Login to ACR
+        run: |
+          echo ${{ secrets.CLIENT_SECRET }} | docker login ${{ env.CONTAINER_REGISTRY }}.azurecr.io -u ${{ secrets.CLIENT_ID }} --password-stdin
+ 
+      - name: Getting AKS credentials
+        run: |
+          az aks get-credentials --resource-group sit722week92D9 --name sit722week92D9 --overwrite-existing
 
+      - name: Attach ACR to AKS
+        run: az aks update -n sit722week92D9 -g sit722week92D9 --attach-acr sit722week92D9
+        
       # Make the build-image.sh script executable
       - name: Make build-image.sh executable
         run: chmod +x ./scripts/build-image.sh
