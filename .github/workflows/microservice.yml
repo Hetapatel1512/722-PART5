@@ -48,6 +48,7 @@ jobs:
       # Configure kubectl for deployment
       - name: Set up Kubernetes config
         run: |
+          mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
