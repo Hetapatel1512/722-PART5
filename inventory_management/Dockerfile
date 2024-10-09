@@ -15,4 +15,4 @@ COPY . /app
 EXPOSE 5002
 
 # Run the app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "4002"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5002"]
