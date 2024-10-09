@@ -54,3 +54,7 @@ jobs:
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: ./scripts/deploy.sh
+
+      # Check the status of services in the cluster
+      - name: Check service status
+        run: kubectl get svc -o wide
